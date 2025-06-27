@@ -101,14 +101,7 @@ android.presplash_color = #6B18A6
 
 # (int) Target Android API, should be as high as possible.
 
-android.api = 31
-
-###############
-###############
-###############
-android.build_tools_version = 34.0.0
-
-android.aapt2FromMavenOverride=/home/mikeinnet/android-sdk/build-tools/34.0.0/aapt2
+android.api = 34
 
 # (int) Minimum API your APK / AAB will support.
 
@@ -118,7 +111,7 @@ android.minapi = 21
 #android.sdk = 33
 
 # (str) Android NDK version to use
-android.ndk = r25c
+android.ndk = 25c
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
 #android.ndk_api = 21
@@ -128,10 +121,9 @@ android.ndk = r25c
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
 #android.ndk_path = ~/android-sdk/ndk/25.1.8937393/
-android.ndk_path= ~/buildcomp/android-ndk-r25c
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-android.sdk_path = ~/buildcomp/android-sdk
+#android.sdk_path = ~/buildcomp/android-sdk
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
