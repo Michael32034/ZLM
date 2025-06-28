@@ -36,7 +36,7 @@ version = 0.2
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3, kivy
+requirements = python3, kivy, bitarray
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -80,7 +80,7 @@ fullscreen = 0
 # red, blue, green, black, white, gray, cyan, magenta, yellow, lightgray,
 # darkgray, grey, lightgrey, darkgrey, aqua, fuchsia, lime, maroon, navy,
 # olive, purple, silver, teal.
-android.presplash_color = #6B18A6
+#android.presplash_color = #6B18A6
 
 # (string) Presplash animation using Lottie format.
 # see https://lottiefiles.com/ for examples and https://airbnb.design/lottie/
@@ -159,7 +159,7 @@ android.accept_sdk_license = True
 #android.service_class_name = org.kivy.android.PythonService
 
 # (str) Android app theme, default is ok for Kivy-based app
-# android.apptheme = "@android:style/Theme.NoTitleBar"
+android.apptheme = "Theme.Material3.DayNight.NoActionBar"
 
 # (list) Pattern to whitelist for the whole project
 #android.whitelist =
