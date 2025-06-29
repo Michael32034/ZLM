@@ -159,7 +159,7 @@ android.accept_sdk_license = True
 #android.service_class_name = org.kivy.android.PythonService
 
 # (str) Android app theme, default is ok for Kivy-based app
-android.apptheme = "Theme.Material3.DayNight.NoActionBar"
+#android.apptheme = "Theme.Material3.DayNight.NoActionBar"
 
 # (list) Pattern to whitelist for the whole project
 #android.whitelist =
