@@ -272,6 +272,7 @@ android.accept_sdk_license = True
 
 # (str) Android logcat filters to use
 #android.logcat_filters = *:S python:D
+android.logcat_filters = python:D kivy:I kivymd:I AndroidRuntime:E
 
 # (bool) Android logcat only display log for activity's pid
 #android.logcat_pid_only = False

@@ -1,12 +1,14 @@
 from kivy.app import App
 from kivy.core.window import Window
-from kivy.utils import _get_platform
+from kivy.utils import platform
 from kivy.lang import Builder
+from zlm import UI
 
 
 KV = """
-#:import UI zlm.UI
 #:import Clipboard kivy.core.clipboard.Clipboard
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import dp kivy.metrics.dp
 ScreenManager:
     id: scrman
     Screen:
@@ -25,12 +27,16 @@ ScreenManager:
                 Widget:
                     size_hint: (0.05, 1)
                 Button:
+                    background_normal: ""
+                    background_color: get_color_from_hex("#00BD16")
                     size_hint: (0.4, 1)
                     text: "Закодувати"
                     on_press: app.root.current = "encode_screen"
                 Widget:
                     size_hint: (0.1, 1)
                 Button:
+                    background_normal: ""
+                    background_color: get_color_from_hex("#2F7DE7")
                     size_hint: (0.4, 1)
                     text: "Розкодувати"
                     on_press: app.root.current = "decode_screen"
@@ -50,6 +56,7 @@ ScreenManager:
                     orientation: "horizontal"
                     Widget:
                         size_hint: (.8,1.)
+                        background_color: get_color_from_hex("#007F16")
                     Button:
                         size_hint: (.2, 1)
                         text: "Home"
@@ -57,21 +64,24 @@ ScreenManager:
                 Label:
                     size_hint: (1.,.1)
                     text: "Введіть головний текст"
+                    background_color: get_color_from_hex("#007F16")
                 TextInput:
                     id: main
                     size_hint: (1., .15)
                 Label:
                     size_hint: (1.,.1)
                     text: "Введіть секретний текст"
+                    background_color: get_color_from_hex("#007F16")
                 TextInput:
                     id: secret
                     size_hint: (1.,.15)
                 Button:
                     size_hint: (1.,.1)
                     text: "Закодувати"
-                    on_press: app.root.ids.output.text = UI.encode(app.root.ids.main.text, app.root.ids.secret.text)
+                    on_press: app.root.ids.output.text = app.ui.encode(app.root.ids.main.text, app.root.ids.secret.text)
                 Widget:
                     size_hint: (1, .1)
+                    background_color: get_color_from_hex("#007F16")
             BoxLayout:
                 size_hint: (1., .1)
                 orientation: "horizontal"
@@ -108,7 +118,7 @@ ScreenManager:
             Button:
                 size_hint: (1.,.1)
                 text: "Розкодувати"
-                on_press: app.root.ids.output.text = UI.decode(app.root.ids.input.text)
+                on_press: app.root.ids.output.text = app.ui.decode(app.root.ids.input.text)
             Label:
                 id: output
                 size_hint: (1.,.2)
@@ -121,9 +131,10 @@ ScreenManager:
 class ZeroLenghtMessage(App):
     icon = "assets/icon.png"
     title = "Zero Lenght Message Maker"
+    ui = UI()
 
     def build(self):
-        if _get_platform() != "android":
+        if platform != "android":
             Window.size = (360, 900)
         return Builder.load_string(KV)
 
