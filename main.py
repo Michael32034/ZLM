@@ -78,7 +78,7 @@ ScreenManager:
                 Button:
                     size_hint: (1.,.1)
                     text: "Закодувати"
-                    on_press: app.root.ids.output.text = app.ui.encode(app.root.ids.main.text, app.root.ids.secret.text)
+                    on_press: app.root.ids.enc_output.text = app.ui.encode(app.root.ids.main.text, app.root.ids.secret.text)
                 Widget:
                     size_hint: (1, .1)
                     background_color: get_color_from_hex("#007F16")
@@ -87,13 +87,13 @@ ScreenManager:
                 orientation: "horizontal"
                 Label:
                     size_hint: (.8,1.)
-                    id: output
+                    id: enc_output
                     text: "Тут буде закодований результат"
                 Button:
                     size_hint: (.2,1.)
                     text: "copy"
                     font_size: 30
-                    on_press: Clipboard.copy(app.root.ids.output.text)
+                    on_press: Clipboard.copy(app.root.ids.enc_output.text)
             Widget:
                 size_hint: (1., .2)
     Screen:
@@ -118,9 +118,9 @@ ScreenManager:
             Button:
                 size_hint: (1.,.1)
                 text: "Розкодувати"
-                on_press: app.root.ids.output.text = app.ui.decode(app.root.ids.input.text)
+                on_press: app.root.ids.dec_output.text = app.ui.decode(app.root.ids.input.text)
             Label:
-                id: output
+                id: dec_output
                 size_hint: (1.,.2)
                 text: "Тут буде розкодоване повідомлення"
             Widget:

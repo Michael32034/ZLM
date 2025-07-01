@@ -1,5 +1,4 @@
-from bitarray import bitarray
-import sys
+from bitstring import BitArray
 
 _ZW_MAP: dict[str, str] = {
     "00": "\u200b",  # ZERO WIDTH SPACE
@@ -14,13 +13,13 @@ class ZLCoder:
     _ZWS_MONO_MAP_INV = {"\u200c": "0", "\u200d": "1"}
     MONOZW = ["\u200c", "\u200d"]
 
-    def strtobin(self, text: str) -> str:
-        outputbin = bitarray()
-        outputbin.frombytes(text.encode())
-        return outputbin.to01()
+    def strtobin(self, text: str, encoding: str = "utf-8") -> str:
+        return BitArray(bytes=text.encode(encoding)).bin
 
-    def bintostr(self, bin: str) -> str:
-        return bitarray(bin).tobytes().decode()
+    def bintostr(
+        self, bits: str, encoding: str = "utf-8", errors: str = "strict"
+    ) -> str:
+        return BitArray(bin=bits).tobytes().decode(encoding, errors)
 
     def bintomonozw(self, bin: str) -> str:
         zwtext = ""
