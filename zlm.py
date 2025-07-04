@@ -1,5 +1,3 @@
-from bitstring import BitArray
-
 _ZW_MAP: dict[str, str] = {
     "00": "\u200b",  # ZERO WIDTH SPACE
     "01": "\u200c",  # ZERO WIDTH NON‑JOINER
@@ -13,13 +11,11 @@ class ZLCoder:
     _ZWS_MONO_MAP_INV = {"\u200c": "0", "\u200d": "1"}
     MONOZW = ["\u200c", "\u200d"]
 
-    def strtobin(self, text: str, encoding: str = "utf-8") -> str:
-        return BitArray(bytes=text.encode(encoding)).bin
+    def strtobin(self, s: str) -> str:
+        return "".join(f"{ord(c):08b}" for c in s)
 
-    def bintostr(
-        self, bits: str, encoding: str = "utf-8", errors: str = "strict"
-    ) -> str:
-        return BitArray(bin=bits).tobytes().decode(encoding, errors)
+    def bintostr(self, b: str) -> str:
+        return "".join(chr(int(b[i : i + 8], 2)) for i in range(0, len(b), 8))
 
     def bintomonozw(self, bin: str) -> str:
         zwtext = ""
@@ -49,10 +45,8 @@ class UI:
 
     @classmethod
     def decode(cls, text):
-        main_text = ""
         crypte = ""
         for i in text:
             if i in cls.zlc.MONOZW:
                 crypte += i
-        print(len(crypte))
         return cls.zlc.monozwtostr(crypte)
