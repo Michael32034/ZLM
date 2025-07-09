@@ -4,13 +4,20 @@ _ZW_MAP: dict[str, str] = {
     "10": "\u200d",  # ZERO WIDTH JOINER
     "11": "\ufeff",  # ZERO WIDTH NO‑BREAK SPACE (BOM)
 }
+_ZW_MAP_INV: dict[str, str] = {
+    "\u200b": "00",
+    "\u200c": "01",
+    "\u200d": "10",
+    "\ufeff": "11",
+}
+_ZW = ["\u200c", "\u200d", "\u200b", "\ufeff"]
+
+_ZWS_MONO_MAP = {"0": "\u200c", "1": "\u200d"}
+_ZWS_MONO_MAP_INV = {"\u200c": "0", "\u200d": "1"}
+_MONOZW = ["\u200c", "\u200d"]
 
 
 class ZLCoder:
-    _ZWS_MONO_MAP = {"0": "\u200c", "1": "\u200d"}
-    _ZWS_MONO_MAP_INV = {"\u200c": "0", "\u200d": "1"}
-    MONOZW = ["\u200c", "\u200d"]
-
     def strtobin(self, s: str) -> str:
         return "".join(f"{ord(c):08b}" for c in s)
 
@@ -20,20 +27,36 @@ class ZLCoder:
     def bintomonozw(self, bin: str) -> str:
         zwtext = ""
         for i in bin:
-            zwtext += self._ZWS_MONO_MAP[i]
+            zwtext += _ZWS_MONO_MAP[i]
         return zwtext
 
     def monozwtobin(self, monozwtext: str) -> str:
         text = ""
         for i in monozwtext:
-            text += self._ZWS_MONO_MAP_INV[i]
+            text += _ZWS_MONO_MAP_INV[i]
         return text
 
-    def strtomonozw(self, text: str) -> str:
-        return self.bintomonozw(self.strtobin(text))
+    def bintozw(self, bin: str) -> str:
+        text = ""
+        print(bin)
+        for i in [f"{bin[i * 2]}{bin[i * 2 + 1]}" for i in range(int(len(bin) / 2))]:
+            text += _ZW_MAP[i]
+            print(i)
+        return text
+
+    def zwtobin(self, zwtext: str) -> str:
+        text = ""
+        print(f"{zwtext}{len(zwtext)}")
+        for i in zwtext:
+            text += _ZW_MAP_INV[i]
+            print(i)
+        return text
 
     def monozwtostr(self, monozw: str):
-        return self.bintostr(self.monozwtobin(monozw))
+        return self.bintostr(self.zwtobin(monozw))
+
+    def strtomonozw(self, text: str) -> str:
+        return self.bintozw(self.strtobin(text))
 
 
 class UI:
@@ -47,6 +70,6 @@ class UI:
     def decode(cls, text):
         crypte = ""
         for i in text:
-            if i in cls.zlc.MONOZW:
+            if i in _ZW:
                 crypte += i
         return cls.zlc.monozwtostr(crypte)

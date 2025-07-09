@@ -6,7 +6,7 @@ title = Zero Lenght Message
 package.name = zlm
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.test
+package.domain = io.github.michael32034
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -21,14 +21,14 @@ source.include_exts = py,png,jpg,kv,atlas
 #source.exclude_exts = spec
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-source.exclude_dirs = tests, bin, venv
+source.exclude_dirs = tests, bin, venv, images
 
 # (list) List of exclusions using pattern matching
 # Do not prefix with './'
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.1
+version = 0.21
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -272,7 +272,7 @@ android.accept_sdk_license = True
 
 # (str) Android logcat filters to use
 #android.logcat_filters = *:S python:D
-android.logcat_filters = python:D kivy:I kivymd:I AndroidRuntime:E
+#android.logcat_filters = python:D kivy:I kivymd:I AndroidRuntime:E
 
 # (bool) Android logcat only display log for activity's pid
 #android.logcat_pid_only = False
@@ -404,7 +404,7 @@ ios.codesign.allowed = false
 [buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
-log_level = 2
+log_level = 0
 
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
 warn_on_root = 1

@@ -1,2 +1,4 @@
 # ZLM
-Congratulations in a simple ZLM cipher 
+Welcome to the simple ZLM encryptor
+> [!CAUTION] Don't use for coding important data
+> Use only for jokes and pranks or at leisure

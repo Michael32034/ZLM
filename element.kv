@@ -1,0 +1,19 @@
+#:set background get_color_from_hex("#003D36")
+
+
+<ColorScreen@Screen>:
+    canvas:
+        Color:
+            rgba: background
+        Rectangle:
+            size: Window.size 
+
+<CLabel@Label>:
+    font_name: "CorrectionBrush"
+
+<CButton@Button>:
+    font_name: "CorrectionBrush"
+
+<ImageButton@ButtonBehavior+Image>:
+    allow_stretch: True
+    keep_ratio: True

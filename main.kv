@@ -1,0 +1,161 @@
+
+#:import Clipboard kivy.core.clipboard.Clipboard
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import Window kivy.core.window.Window
+#:import Logger kivy.logger.Logger
+#: import Image kivy.core.image.Image
+
+#:include element.kv
+
+#:set dark get_color_from_hex("#000000")
+#:set green get_color_from_hex("#00BD16")
+#:set blue get_color_from_hex("#2F7DE7")
+
+ScreenManager:
+    id: scrman
+    ColorScreen:
+        name: "hello_screen"
+        BoxLayout:
+            orientation: "vertical"
+            Widget:
+                size_hint: (1., .1)
+            CLabel:
+                text: "Welcome to ZLM"
+                size_hint: (1., .2)
+                font_size: sp(30)
+            Widget:
+                size_hint: (1., .5)
+            BoxLayout:
+                size_hint: (1.,.1)
+                orientation: "horizontal"
+                Widget:
+                    size_hint: (0.05, 1)
+                CButton:
+                    background_normal: ""
+                    background_color: (0, 0, 0, 0)
+                    canvas.before:
+                        Color:
+                            rgba: green
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                            radius:  [0, (dp(600), dp(180)), 0, (dp(600), dp(180))]
+                    font_size: sp(22)
+                    size_hint: (0.4, 1)
+                    text: "Encode"
+                    on_press:
+                        app.root.current = "encode_screen"
+                        app.root.transition.direction = "right"
+                Widget:
+                    size_hint: (0.1, 1)
+                CButton:
+                    background_normal: ""
+                    background_color: (0, 0, 0, 0)
+                    canvas.before:
+                        Color:
+                            rgba: blue
+                        RoundedRectangle:
+                            size: self.size
+                            pos:self.pos
+                            radius: [ (dp(600), dp(180)), 0, (dp(600), dp(180)), 0]
+                    font_size: sp(22)
+                    size_hint: (0.4, 1)
+                    text: "Decode"
+                    on_press:
+                        app.root.current = "decode_screen"
+                        app.root.transition.direction = "left"
+                Widget:
+                    size_hint: (0.05, 1)
+            Widget:
+                size_hint: (1.,.2)
+    ColorScreen:
+        name: "encode_screen"
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                size_hint: (1.,.7)
+                orientation: "vertical"
+                BoxLayout:
+                    size_hint: (1.,.1)
+                    orientation: "horizontal"
+                    Widget:
+                        size_hint: (.8,1.)
+                    CButton:
+                        size_hint: (.2, 1)
+                        text: "Home"
+                        background_color: green
+                        background_normal: ""
+                        on_press:
+                            app.root.current = "hello_screen"
+                            app.root.transition.direction = "left"
+                CLabel:
+                    size_hint: (1.,.1)
+                    text: "Enter the main text"
+                TextInput:
+                    id: main
+                    size_hint: (1., .15)
+                CLabel:
+                    size_hint: (1.,.1)
+                    text: "Enter the secret text"
+                TextInput:
+                    id: secret
+                    size_hint: (1.,.15)
+                CButton:
+                    size_hint: (1.,.1)
+                    background_color: green
+                    background_normal: ""
+                    text: "Encode"
+                    on_press: app.root.ids.enc_output.text = app.ui.encode(app.root.ids.main.text, app.root.ids.secret.text)
+                Widget:
+                    size_hint: (1, .1)
+            BoxLayout:
+                size_hint: (1., .1)
+                orientation: "horizontal"
+                CLabel:
+                    size_hint: (.8,1.)
+                    id: enc_output
+                    text: "Here will be the encoded result"
+                CButton:
+                    size_hint: (.2,1.)
+                    text: "copy"
+                    background_color: green
+                    background_normal: ""
+                    font_size: 30
+                    on_press: Clipboard.copy(app.root.ids.enc_output.text)
+            Widget:
+                size_hint: (1., .2)
+    ColorScreen:
+        name: "decode_screen"
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                size_hint: (1.,.1)
+                orientation: "horizontal"
+                Widget:
+                    size_hint: (.8,1.)
+                CButton:
+                    size_hint: (.2, 1)
+                    text: "Home"
+                    background_color: blue
+                    background_normal: ""
+                    on_press:
+                        app.root.current = "hello_screen"
+                        app.root.transition.direction = "right"
+            CLabel:
+                size_hint: (1.,.1)
+                text: "Enter encoded text"
+            TextInput:
+                size_hint: (1.,.2)
+                id: input
+            CButton:
+                size_hint: (1.,.1)
+                text: "Decode"
+                background_color: blue
+                background_normal: ""
+                on_press: app.root.ids.dec_output.text = app.ui.decode(app.root.ids.input.text)
+            CLabel:
+                id: dec_output
+                size_hint: (1.,.2)
+                text: "Here will be the encoded message"
+            Widget:
+                size_hint: (1.,.4)
