@@ -1,8 +1,8 @@
-name: Build APK with Buildozer
+name: Build debug version
 
 on:
   push:
-      branches: [ main ]
+      branches: [ develop ]
 
 jobs:
     build:
@@ -12,8 +12,8 @@ jobs:
             - name: Build APK
               uses: digreatbrian/buildozer-action@v2
               with:
-                    python-version: 3.8
-                    buildozer-cmd: buildozer android deploy
+                    python-version: 3.9
+                    buildozer-cmd: buildozer android debug
 
             - name: Upload artifacts
               uses: actions/upload-artifact@v4
