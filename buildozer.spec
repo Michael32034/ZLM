@@ -272,7 +272,7 @@ android.accept_sdk_license = True
 
 # (str) Android logcat filters to use
 #android.logcat_filters = *:S python:D
-#android.logcat_filters = python:D kivy:I kivymd:I AndroidRuntime:E
+android.logcat_filters = python:D kivy:I kivymd:I AndroidRuntime:E
 
 # (bool) Android logcat only display log for activity's pid
 #android.logcat_pid_only = False
@@ -404,7 +404,7 @@ ios.codesign.allowed = false
 [buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
-log_level = 0
+log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
 warn_on_root = 1
