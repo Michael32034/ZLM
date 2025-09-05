@@ -19,10 +19,11 @@ _MONOZW = ["\u200c", "\u200d"]
 
 class ZLCoder:
     def strtobin(self, s: str) -> str:
-        return "".join(f"{ord(c):08b}" for c in s)
+        return "".join(f"{b:08b}" for b in s.encode("utf-8"))
 
     def bintostr(self, b: str) -> str:
-        return "".join(chr(int(b[i : i + 8], 2)) for i in range(0, len(b), 8))
+        bytes_arr = bytes(int(b[i : i + 8], 2) for i in range(0, len(b), 8))
+        return bytes_arr.decode("utf-8")
 
     def bintomonozw(self, bin: str) -> str:
         zwtext = ""
@@ -38,18 +39,18 @@ class ZLCoder:
 
     def bintozw(self, bin: str) -> str:
         text = ""
-        print(bin)
+        # print(bin)
         for i in [f"{bin[i * 2]}{bin[i * 2 + 1]}" for i in range(int(len(bin) / 2))]:
             text += _ZW_MAP[i]
-            print(i)
+            # print(i)
         return text
 
     def zwtobin(self, zwtext: str) -> str:
         text = ""
-        print(f"{zwtext}{len(zwtext)}")
+        # print(f"{zwtext}{len(zwtext)}")
         for i in zwtext:
             text += _ZW_MAP_INV[i]
-            print(i)
+            # print(i)
         return text
 
     def monozwtostr(self, monozw: str):
